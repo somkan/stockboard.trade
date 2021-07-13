@@ -1,9 +1,7 @@
 import sys
 import requests
-import csv
 import re
 import json
-import pandas as pd
 import os
 import pymongo
 from datetime import date
