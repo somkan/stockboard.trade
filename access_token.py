@@ -73,7 +73,7 @@ def main():
     except Exception as e:
         print(e)
     
-    telegram("Fyers Access Token Generated for:",userid)
+    telegram("Fyers Access Token Generated for:",USERID)
     global fyers
 
     token = MYCOL2.find({}, {"fyers_id", "access_token"})
