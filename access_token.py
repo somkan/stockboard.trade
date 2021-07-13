@@ -66,7 +66,7 @@ def main():
                              fyers_id=fyers_id, password=password, pan_dob=pan_or_dob)
 
     myReq = {"fyers_id": fyers_id, "access_token": access_token}
-    Access_user = {"fyers_id": userid}
+    Access_user = {"fyers_id": USERID}
     try:
         d = mycol2.delete_one(Access_user)
         x = mycol2.insert_one(myReq)
@@ -78,7 +78,7 @@ def main():
 
     token = MYCOL2.find({}, {"fyers_id", "access_token"})
     for data in token:
-    	if data['fyers_id'] ==userid:
+    	if data['fyers_id'] ==USERID:
         	access_token = data['access_token']
 
     fyers = fyersModel.FyersModel()
