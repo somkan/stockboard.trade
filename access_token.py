@@ -66,8 +66,8 @@ def main():
     myReq = {"fyers_id": fyers_id, "access_token": access_token}
     Access_user = {"fyers_id": USERID}
     try:
-        d = mycol2.delete_one(Access_user)
-        x = mycol2.insert_one(myReq)
+        d = MYCOL2.delete_one(Access_user)
+        x = MYCOL2.insert_one(myReq)
     except Exception as e:
         print(e)
     
