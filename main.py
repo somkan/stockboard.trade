@@ -14,12 +14,12 @@ STG1 = app.config.get("STG1")
 STG2 = app.config.get("STG2")
 STG3 = app.config.get("STG3")
 
-myclient = pymongo.MongoClient(DBCONNECTION)
-mydb = myclient[MASTERDB]
-mycol2 = mydb[ACCESS_TOKEN]
-myStrategy1 = mydb[STG1]
-myStrategy2 = mydb[STG2]
-myStrategy3 = mydb[STG3]
+myclient = DBCONNECTION
+mydb = MASTERDB
+mycol2 = ACCESS_TOKEN
+myStrategy1 = STG1
+myStrategy2 = STG2
+myStrategy3 = STG3
 
 today = date.today()
 
