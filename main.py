@@ -44,7 +44,7 @@ def telegram(message1,message2):
 def index():
     return "Hi Welcome to Stockboard"
 
-@app.route('/alert', methods=['POST'])
+@app.route('/cpr1', methods=['POST'])
 def get_webhook3():
     today = date.today()
     # dd/mm/YY
