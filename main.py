@@ -13,6 +13,7 @@ ACCESS_TOKEN = app.config.get("ACCESS_TOKEN")
 STG1 = app.config.get("STG1")
 STG2 = app.config.get("STG2")
 STG3 = app.config.get("STG3")
+STG4 = app.config.get("STG4")
 
 myclient = DBCONNECTION
 mydb = MASTERDB
@@ -20,6 +21,7 @@ mycol2 = ACCESS_TOKEN
 myStrategy1 = STG1
 myStrategy2 = STG2
 myStrategy3 = STG3
+myTrade = STG4
 
 today = date.today()
 
@@ -42,52 +44,7 @@ def telegram(message1,message2):
 def index():
     return "Hi Welcome to Stockboard"
 
-@app.route('/strategy1', methods=['POST'])
-def get_webhook1():
-    today = date.today()
-    # dd/mm/YY
-    d1 = today.strftime("%d/%m/%Y")
-    if request.method == 'POST':
- #       print("received data: ", request.json)
-        data = json.loads(request.data)
-        ticker = data['stocks'].split(',')[0]
-        price = data['trigger_prices'].split(',')[0]
-        when = data['triggered_at']
-        webhook_ref = data['webhook_url']
-        telegram("Strategy1| ",msg)
-        file_data1 = {"Date":d1,"stocks": ticker,"trigger_prices":price,"triggered_at":when,"scan":webhook_ref,"Indicator":"I","user":CLIENT1}
-
-        x = myStrategy1.insert_one(file_data1)
-
-        return Response(status=200)
-    else:
-        abort(400)
-
-
-@app.route('/strategy2', methods=['POST'])
-def get_webhook2():
-    today = date.today()
-    # dd/mm/YY
-    d1 = today.strftime("%d/%m/%Y")
-    if request.method == 'POST':
-        #       print("received data: ", request.json)
-        data = json.loads(request.data)
-        ticker = data['stocks'].split(',')[0]
-        price = data['trigger_prices'].split(',')[0]
-        when = data['triggered_at']
-        webhook_ref = data['webhook_url']
-        telegram("Strategy2| ", msg)
-        file_data1 = {"Date": d1, "stocks": ticker, "trigger_prices": price, "triggered_at": when, "scan": webhook_ref,
-                      "Indicator": "I", "user": CLIENT1}
-
-        x = myStrategy2.insert_one(file_data1)
-
-        return Response(status=200)
-    else:
-        abort(400)
-
-
-@app.route('/strategy3', methods=['POST'])
+@app.route('/alert', methods=['POST'])
 def get_webhook3():
     today = date.today()
     # dd/mm/YY
@@ -99,15 +56,15 @@ def get_webhook3():
         price = data['trigger_prices'].split(',')[0]
         when = data['triggered_at']
         webhook_ref = data['webhook_url']
-        telegram("Strategy3| ", msg)
+        telegram("Stockboard-Alert-Heroku| ", msg)
         file_data1 = {"Date": d1, "stocks": ticker, "trigger_prices": price, "triggered_at": when, "scan": webhook_ref,
                       "Indicator": "I", "user": CLIENT1}
 
-        x = myStrategy3.insert_one(file_data1)
+        x = myTrade.insert_one(file_data1)
 
         return Response(status=200)
     else:
         abort(400)
 
 if __name__ == '__main__':
-    app.run(host="127.0.0.1",port=5000)
+    app.run()
