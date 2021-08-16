@@ -67,4 +67,5 @@ def get_webhook3():
         abort(400)
 
 if __name__ == '__main__':
+    telegram("Stockboard APP","Running in Heroku")
     app.run()
