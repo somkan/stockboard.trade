@@ -31,7 +31,7 @@ def telegram(message1,message2):
 
 @app.route('/')
 def index():
-    return "HI Welcome to Stockboard"
+    return <h1>"HI Welcome to Stockboard"</h1>
 
 @app.route('/strategy1', methods=['POST'])
 def get_webhook1():
