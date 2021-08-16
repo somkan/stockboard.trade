@@ -26,6 +26,9 @@ today = date.today()
 # dd/mm/YY
 d1 = today.strftime("%d/%m/%Y")
 def telegram(message1,message2):
+    BOT_TOKEN = app.config.get(BOT_TOKEN)
+    MONITOR_SIGNAL = app.config.get(MONITOR_SIGNAL)
+
     bot_token = BOT_TOKEN # paste bot_token
     bot_chatID = MONITOR_SIGNAL  #chatid of Telegram group Monitor Signal
     bot_message = str(message1) + str(message2)+"\n"
@@ -37,7 +40,7 @@ def telegram(message1,message2):
 
 @app.route('/')
 def index():
-    print("HI Welcome to Stockboard")
+    return "Hi Welcome to Stockboard"
 
 @app.route('/strategy1', methods=['POST'])
 def get_webhook1():
