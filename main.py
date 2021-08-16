@@ -9,6 +9,12 @@ import requests
 app = Flask(__name__)
 
 myclient = pymongo.MongoClient(DBCONNECTION)
+MASTERDB = app.config.get("MASTERDB")
+ACCESS_TOKEN = app.config.get("ACCESS_TOKEN")
+STG1 = app.config.get("STG1")
+STG2 = app.config.get("STG2")
+STG3 = app.config.get("STG3")
+
 mydb = myclient[MASTERDB]
 mycol2 = mydb[ACCESS_TOKEN]
 myStrategy1 = mydb[STG1]
@@ -31,7 +37,7 @@ def telegram(message1,message2):
 
 @app.route('/')
 def index():
-    return <h1>"HI Welcome to Stockboard"</h1>
+    print("HI Welcome to Stockboard")
 
 @app.route('/strategy1', methods=['POST'])
 def get_webhook1():
@@ -101,4 +107,4 @@ def get_webhook3():
         abort(400)
 
 if __name__ == '__main__':
-    app.run()
+    app.run(host="127.0.0.1",port=5000)
