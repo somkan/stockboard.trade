@@ -7,14 +7,14 @@ import requests
 
 # 8/7/21 - Updated Strategy143
 app = Flask(__name__)
-
-myclient = pymongo.MongoClient(DBCONNECTION)
+DBCONNECTION = app.config.get("DBCONNECTION")
 MASTERDB = app.config.get("MASTERDB")
 ACCESS_TOKEN = app.config.get("ACCESS_TOKEN")
 STG1 = app.config.get("STG1")
 STG2 = app.config.get("STG2")
 STG3 = app.config.get("STG3")
 
+myclient = pymongo.MongoClient(DBCONNECTION)
 mydb = myclient[MASTERDB]
 mycol2 = mydb[ACCESS_TOKEN]
 myStrategy1 = mydb[STG1]
