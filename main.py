@@ -1,4 +1,4 @@
-from flask import Flask, request, abort, Response
+from flask import Flask, request, abort, Response,render_template
 import os
 import json
 import pymongo
@@ -10,6 +10,7 @@ app = Flask(__name__)
 DBCONNECTION = app.config.get("DBCONNECTION")
 MASTERDB = app.config.get("MASTERDB")
 ACCESS_TOKEN = app.config.get("ACCESS_TOKEN")
+AUTH_USER = app.config.get("AUTH_USER")
 STG1 = app.config.get("STG1")
 STG2 = app.config.get("STG2")
 STG3 = app.config.get("STG3")
@@ -42,7 +43,21 @@ def telegram(message1,message2):
 
 @app.route('/')
 def index():
-    return "Hi Welcome to Stockboard"
+    return render_template("index.html")
+
+@app.route('/login', methods=['POST'])
+def response():
+ fname = request.form.get("fname")
+ passwd = request.form.get("passwd")
+ key_data = myAuth.find({}, {"uname", "passwd"})
+ for record in key_data:
+    uname = record["uname"]
+    if uname == fname and passwd == record["passwd"]:
+        fname = uname
+        return render_template("login.html", name=fname)
+    else:
+        fname = "Unknown User"
+        return render_template("index.html", name=fname)
 
 @app.route('/cpr1', methods=['POST'])
 def get_webhook3():
