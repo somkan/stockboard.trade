@@ -1,8 +1,5 @@
 # -*- coding: utf-8 -*-
 """
-Zerodha Kite Connect -  Strategy1
-
-@author: Somasundaram
 """
 from fyers_api import fyersModel, accessToken
 import json
@@ -69,7 +66,7 @@ def main(quantity,ticker,price1):
             msg1 = "stock :"+ticker,"quantity:"+str(quantity),"Price:"+str(price1)
             telegram(msg1,stat)
         except Exception as e:
-            print("API error for ticker :",e)
+            #print("API error for ticker :",e)
             telegram("API error for ticker :",e)
             exit()
 #############################################################################################################
