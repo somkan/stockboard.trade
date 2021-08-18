@@ -72,18 +72,18 @@ fyers = fyersModel.FyersModel()
 #print(access_token)
 try:
     portfolio=fyers.funds(token=access_token)
-    print(portfolio)
+    #print(portfolio)
     # get the equityAmount from the response and add % to capital allotment
     if portfolio["code"] !=401:
         fund = portfolio["data"]["fund_limit"][0]
         allot=fund["equityAmount"]
         capital = int(float(allot))  # 100% funds allocated to this strategy
-        print(capital)
+        #print(capital)
         capital = int(capital)
     else:
         telegram(portfolio["code"],portfolio["message"])
 except Exception as w:
-    print(w)
+    #print(w)
 starttime=time.time()
 telegram("Good Morning", "Stockboard.trade -Strategy1 running")
 timeout = time.time() + 60*60*6  # 60 seconds times 360 meaning 6 hrs
