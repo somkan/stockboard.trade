@@ -23,6 +23,7 @@ myStrategy1 = STG1
 myStrategy2 = STG2
 myStrategy3 = STG3
 myTrade = STG4
+myAuth = AUTH_USER
 
 today = date.today()
 
