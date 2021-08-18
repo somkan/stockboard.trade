@@ -59,7 +59,7 @@ def main(quantity,ticker,price1):
             msg1 = "stock :"+ticker,"quantity:"+str(quantity),"Price:"+str(price1)
             telegram(msg1,stat)
         except Exception as e:
-            #print("API error for ticker :",e)
+#            print("API error for ticker :",e)
             telegram("API error for ticker :",e)
             exit()
 #############################################################################################################
@@ -85,7 +85,7 @@ try:
 except Exception as w:
     print(w)
 starttime=time.time()
-telegram("Good Morning", "Strategy1 running")
+telegram("Good Morning", "Stockboard.trade -Strategy1 running")
 timeout = time.time() + 60*60*6  # 60 seconds times 360 meaning 6 hrs
 while time.time() <= timeout:
     try:
