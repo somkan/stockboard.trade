@@ -28,13 +28,6 @@ def telegram(message1,message2):
     bot_token = app.config.get("BOT_TOKEN")  # paste bot_token
     bot_chatID = app.config.get("MONTOR_SIGNAL")  # paste your chatid where you want to send alert(group or channel or personal)
     bot_message = str(message1) + str(message2)
-
-    # Get full path for writing.
-    name = "Strategy1_ALERT_OUPUT-" + str(date.today()) + ".txt"
-    with open(name, "a") as f:
-        # Write data to file.
-        f.write(bot_message)
-
     send_text = 'https://api.telegram.org/bot' + bot_token + '/sendMessage?chat_id=' + bot_chatID + '&parse_mode=Markdown&text=' + bot_message
     response = requests.get(send_text)
     return response.json()
