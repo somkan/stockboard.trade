@@ -31,7 +31,7 @@ today = date.today()
 d1 = today.strftime("%d/%m/%Y")
 def telegram(message1,message2):
     BOT_TOKEN = app.config.get(BOT_TOKEN)
-    MONITOR_SIGNAL = app.config.get(MONITOR_SIGNAL)
+    MONITOR_SIGNAL = app.config.get(MONTOR_SIGNAL)
 
     bot_token = BOT_TOKEN # paste bot_token
     bot_chatID = MONITOR_SIGNAL  #chatid of Telegram group Monitor Signal
