@@ -31,7 +31,7 @@ today = date.today()
 d1 = today.strftime("%d/%m/%Y")
 def telegram(message1,message2):
     BOT_TOKEN = app.config.get("BOT_TOKEN")
-    MONITOR_SIGNAL = app.config.get("MONTOR_SIGNAL")
+    MONTOR_SIGNAL = app.config.get("MONTOR_SIGNAL")
 
     bot_token = BOT_TOKEN # paste bot_token
     bot_chatID = MONTOR_SIGNAL  #chatid of Telegram group Monitor Signal
@@ -48,17 +48,17 @@ def index():
 
 @app.route('/login', methods=['POST'])
 def response():
- fname = request.form.get("fname")
- passwd = request.form.get("passwd")
- key_data = myAuth.find({}, {"uname", "passwd"})
- for record in key_data:
-    uname = record["uname"]
-    if uname == fname and passwd == record["passwd"]:
-        fname = uname
-        return render_template("login.html", name=fname)
-    else:
-        fname = "Unknown User"
-        return render_template("index.html", name=fname)
+    fname = request.form.get("fname")
+    passwd = request.form.get("passwd")
+    key_data = myAuth.find({},{"uname", "passwd"})
+    for record in key_data:
+        uname = record["uname"]
+        if uname == fname and passwd == record["passwd"]:
+            fname = uname
+            return render_template("login.html", name=fname)
+        else:
+            fname = "Unknown User"
+            return render_template("index.html", name=fname)
 
 @app.route('/cpr1', methods=['POST'])
 def get_webhook3():
