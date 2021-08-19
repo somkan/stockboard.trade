@@ -48,9 +48,14 @@ def index():
 
 @app.route('/login', methods=['POST'])
 def response():
+    app.config.get("DBCONNECTION")
+    app.config.get("MASTERDB")
+    AUTH_USER = app.config.get("AUTH_USER")
+    myAuth = AUTH_USER
+
     fname = request.form.get("fname")
     passwd = request.form.get("passwd")
-    key_data = AUTH_USER.find({},{"uname", "passwd"})
+    key_data = myAuth.find({}, {"uname", "passwd"})
     for record in key_data:
         uname = record["uname"]
         if uname == fname and passwd == record["passwd"]:
