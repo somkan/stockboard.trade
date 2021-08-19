@@ -30,11 +30,11 @@ today = date.today()
 # dd/mm/YY
 d1 = today.strftime("%d/%m/%Y")
 def telegram(message1,message2):
-    BOT_TOKEN = app.config.get(BOT_TOKEN)
-    MONITOR_SIGNAL = app.config.get(MONTOR_SIGNAL)
+    BOT_TOKEN = app.config.get("BOT_TOKEN")
+    MONITOR_SIGNAL = app.config.get("MONTOR_SIGNAL")
 
     bot_token = BOT_TOKEN # paste bot_token
-    bot_chatID = MONITOR_SIGNAL  #chatid of Telegram group Monitor Signal
+    bot_chatID = MONTOR_SIGNAL  #chatid of Telegram group Monitor Signal
     bot_message = str(message1) + str(message2)+"\n"
 
     send_text = 'https://api.telegram.org/bot' + bot_token + '/sendMessage?chat_id=' + bot_chatID + '&parse_mode=Markdown&text=' + bot_message
