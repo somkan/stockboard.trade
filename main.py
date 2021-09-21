@@ -34,7 +34,8 @@ def telegram(message1,message2):
     MONTOR_SIGNAL = app.config.get("MONTOR_SIGNAL")
 
     bot_token = BOT_TOKEN # paste bot_token
-    bot_chatID = MONTOR_SIGNAL  #chatid of Telegram group Monitor Signal
+    #bot_chatID = MONTOR_SIGNAL  #chatid of Telegram group Monitor Signal
+    bot_chatID = "-1001206209234"
     bot_message = str(message1) + str(message2)+"\n"
 
     send_text = 'https://api.telegram.org/bot' + bot_token + '/sendMessage?chat_id=' + bot_chatID + '&parse_mode=Markdown&text=' + bot_message
@@ -65,7 +66,7 @@ def response():
             fname = "Unknown User"
             return render_template("index.html", name=fname)
 
-@app.route('/cpr1', methods=['POST'])
+@app.route('/strategy1', methods=['POST'])
 def get_webhook3():
     today = date.today()
     # dd/mm/YY
