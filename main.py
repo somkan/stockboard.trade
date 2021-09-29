@@ -33,7 +33,7 @@ def telegram(message1,message2):
     BOT_TOKEN = app.config.get("BOT_TOKEN")
     MONTOR_SIGNAL = app.config.get("MONTOR_SIGNAL")
 
-    bot_token = BOT_TOKEN # paste bot_token
+    bot_token = str(BOT_TOKEN) # paste bot_token
     #bot_chatID = MONTOR_SIGNAL  #chatid of Telegram group Monitor Signal
     bot_chatID = "-1001206209234"
     bot_message = str(message1) + str(message2)+"\n"
