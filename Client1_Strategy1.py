@@ -10,6 +10,7 @@ import requests
 from datetime import datetime
 import pymongo
 from datetime import date
+import logging
 
 myclient =app.config.get("DBCONNECTION")
 mydb = app.config.get("MASTERDB")
@@ -25,8 +26,8 @@ token = mycol2.find({}, {"fyers_id", "access_token"})
 
 
 def telegram(message1,message2):
-    bot_token = app.config.get("BOT_TOKEN")  # paste bot_token
-    bot_chatID = app.config.get("MONTOR_SIGNAL")  # paste your chatid where you want to send alert(group or channel or personal)
+    bot_token = str(app.config.get("BOT_TOKEN"))  # paste bot_token
+    bot_chatID = str(app.config.get("MONTOR_SIGNAL"))  # paste your chatid where you want to send alert(group or channel or personal)
     bot_message = str(message1) + str(message2)
     send_text = 'https://api.telegram.org/bot' + bot_token + '/sendMessage?chat_id=' + bot_chatID + '&parse_mode=Markdown&text=' + bot_message
     response = requests.get(send_text)
@@ -56,10 +57,13 @@ def main(quantity,ticker,price1):
             #print(stat)
             message(userid,stat)
             #print("stock :"+ticker,"quantity:"+str(quantity),"Price:"+str(price1))
-            msg1 = "stock :"+ticker,"quantity:"+str(quantity),"Price:"+str(price1)
+
+            msg1 = "stock :"+str(ticker),"quantity:"+str(quantity),"Price:"+str(price1)
             telegram(msg1,stat)
+
         except Exception as e:
 #            print("API error for ticker :",e)
+            logging.error(e)
             telegram("API error for ticker :",e)
             exit()
 #############################################################################################################
@@ -83,6 +87,7 @@ try:
     else:
         telegram(portfolio["code"],portfolio["message"])
 except Exception as w:
+    logging.error(w)
     #print(w)
 starttime=time.time()
 telegram("Good Morning", "Stockboard.trade -Strategy1 running")
@@ -100,6 +105,7 @@ while time.time() <= timeout:
                         {'$set': {"Indicator": "C"}}
                     )
                     msg = "Signal picked for " + userid
+                    logging.info(msg)
                     telegram(msg, " Flag Changed")
                     ticker = "NSE:" + strategy1_ticker +"-EQ"
                     price1 = strategy1_price
@@ -109,5 +115,6 @@ while time.time() <= timeout:
                     time.sleep(60 - ((time.time() - starttime) % 60.0))
     except KeyboardInterrupt:
         print('\n\nKeyboard exception received. Exiting.')
+        logging.error("Keyboard exception received. Exiting.")
         telegram("User Stopped for: ",userid)
         exit()
