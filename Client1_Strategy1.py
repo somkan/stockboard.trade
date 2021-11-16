@@ -11,6 +11,7 @@ from datetime import datetime
 import pymongo
 from datetime import date
 import logging
+import os
 
 myclient =app.config.get("DBCONNECTION")
 mydb = app.config.get("MASTERDB")
@@ -33,11 +34,39 @@ def telegram(message1,message2):
     response = requests.get(send_text)
     return response.json()
 
+def read_auth():
+    key_signal = mycol.find({}, {"app_id", "app_secret", "password", "pan_or_dob", "userid", "redirect_uri"})
+    for data in key_signal:
+        if data["userid"] == userid:
+            client_id = data["app_id"]
+            secret_key = data["app_secret"]
+            redirect_uri = data["redirect_uri"]
+            username = userid
+            password = data["password"]
+            pan=data["pan_or_dob"]
+            return client_id,secret_key,redirect_uri,username,password,pan
+
+def cleanup():
+    print("Cleanup running...")
+    key_signal = myTrade.find({}, {"user", "Indicator"})
+    for data in key_signal:
+        if data["user"] == userid:
+            if data["Indicator"] == "I":
+                x = myTrade.update_many(
+                    {"user": userid},
+                    {'$set': {"Indicator": "S"}}
+                )
+                print(x.modified_count, "documents updated for: " + userid + " in "+strategy_name)
+                msg = ":" + str(x.modified_count) + "documents updated for: " + userid + " in "+strategy_name
+                if x.modified_count >0:
+                    telegram("Cleanup ", msg)
+                else:
+                    pass
 
 def main(quantity,ticker,price1):
         try:
-            trade=fyers.place_orders(
-            token=access_token,
+            trade=fyers.place_order(
+#            token=access_token,
             data = {
             "symbol": ticker,
             "qty": quantity,
@@ -54,36 +83,32 @@ def main(quantity,ticker,price1):
             }
             )
             stat=trade["message"]
-            #print(stat)
             message(userid,stat)
-            #print("stock :"+ticker,"quantity:"+str(quantity),"Price:"+str(price1))
-
             msg1 = "stock :"+str(ticker),"quantity:"+str(quantity),"Price:"+str(price1)
             telegram(msg1,stat)
 
         except Exception as e:
-#            print("API error for ticker :",e)
-            logging.error(e)
             telegram("API error for ticker :",e)
-            exit()
+#            exit()
 #############################################################################################################
 #############################################################################################################
 for data in token:
     if data['fyers_id'] ==userid:
         access_token = data['access_token']
 
-fyers = fyersModel.FyersModel()
-#print(access_token)
+client_id=read_auth()[0]
+
+fyers = fyersModel.FyersModel(client_id=client_id, token=access_token, log_path=os.getcwd())
+
 try:
-    portfolio=fyers.funds(token=access_token)
-    #print(portfolio)
+    portfolio=fyers.funds()
     # get the equityAmount from the response and add % to capital allotment
     if portfolio["code"] !=401:
-        fund = portfolio["data"]["fund_limit"][0]
+        fund = portfolio["fund_limit"][0]
         allot=fund["equityAmount"]
-        capital = int(float(allot))  # 100% funds allocated to this strategy
-        #print(capital)
+        capital = int(float(allot) * 0.3)
         capital = int(capital)
+        cleanup()
     else:
         telegram(portfolio["code"],portfolio["message"])
 except Exception as w:
