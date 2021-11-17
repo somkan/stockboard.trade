@@ -66,7 +66,7 @@ def response():
             fname = "Unknown User"
             return render_template("index.html", name=fname)
 
-@app.route('/strategy1', methods=['POST'])
+@app.route('/strategy9', methods=['POST'])
 def get_webhook3():
     today = date.today()
     # dd/mm/YY
@@ -90,4 +90,4 @@ def get_webhook3():
 
 if __name__ == '__main__':
     telegram("Stockboard APP","Running in Heroku")
-    app.run()
+    app.run(host="https://stockboard-app.herokuapp.com",debug=True)
