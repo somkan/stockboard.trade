@@ -22,3 +22,5 @@ print(strategy1)
 print(userid)
 key_signal = strategy1.find({}, {"stocks", "trigger_prices", "user", "Indicator"})
 #key_signal = strategy1.find({})
+for data in key_signal:
+    print(data["stocks"])
