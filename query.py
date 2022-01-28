@@ -16,7 +16,7 @@ import os
 myclient =os.environ.get("DBCONNECTION")
 mydb = os.environ.get("MASTERDB")
 
-strategy1 =mydb["strategy1"]
+strategy1 =os.getenv("MASTERDB")["strategy1"])
 userid = os.environ.get("CLIENT1")
 print(mydb)
 print(strategy1)
