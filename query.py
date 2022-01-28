@@ -19,7 +19,8 @@ strategy1 = os.environ.get("STG1")
 userid = os.environ.get("CLIENT1")
 console.log(strategy1)
 key_signal = strategy1.find({}, {"stocks", "trigger_prices", "user", "Indicator"})
+#key_signal = strategy1.find()
 for data in key_signal:
     if data["user"] == userid:
-        console.log("userid")
-        console.log(data["user"])
+        print("userid")
+        print(data["user"])
