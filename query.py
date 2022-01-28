@@ -13,8 +13,8 @@ from datetime import date
 import logging
 import os
 
-myclient =os.environ.get("DBCONNECTION")
-mydb = os.environ.get("DBCONNECTION")["StockboardDB"]
+myclient =os.environ.get(DBCONNECTION)
+mydb = os.environ.get(DBCONNECTION)["StockboardDB"]
 
 strategy1 =mydb["strategy1"]
 userid = os.environ.get("CLIENT1")
