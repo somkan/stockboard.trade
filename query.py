@@ -13,16 +13,12 @@ from datetime import date
 import logging
 import os
 
-myclient =os.environ.get("DBCONNECTION")
-myclient1=myclient
-
-print(myclient1)
-mydb = myclient1["StockboardDB"]
-#strategy1 = os.environ.get("STG1")
+myclient =pymongo.MongoClient("mongodb+srv://admin:admin@cluster0.xsz8r.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
+mydb = myclient["StockboardDB"]
 strategy1 =mydb["strategy1"]
 userid = os.environ.get("CLIENT1")
 print(mydb)
 print(strategy1)
 print(userid)
-#key_signal = strategy1.find({}, {"stocks", "trigger_prices", "user", "Indicator"})
-key_signal = strategy1.find({})
+key_signal = strategy1.find({}, {"stocks", "trigger_prices", "user", "Indicator"})
+#key_signal = strategy1.find({})
