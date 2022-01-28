@@ -18,6 +18,7 @@ mydb = os.environ.get("MASTERDB")
 strategy1 = os.environ.get("STG1")
 #strategy1 =mydb["strategy1"]
 userid = os.environ.get("CLIENT1")
+print(mydb)
 print(strategy1)
 print(userid)
 #key_signal = strategy1.find({}, {"stocks", "trigger_prices", "user", "Indicator"})
