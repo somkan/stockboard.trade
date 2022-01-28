@@ -14,9 +14,9 @@ import logging
 import os
 
 myclient =os.environ.get("DBCONNECTION")
-mydb = os.environ.get("MASTERDB")
+mydb = os.environ.get("DBCONNECTION")["StockboardDB"]
 
-strategy1 =os.getenv("MASTERDB")["strategy1"]
+strategy1 =mydb["strategy1"]
 userid = os.environ.get("CLIENT1")
 print(mydb)
 print(strategy1)
