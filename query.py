@@ -13,10 +13,10 @@ from datetime import date
 import logging
 import os
 
-myclient =app.config.get("DBCONNECTION")
-mydb = app.config.get("MASTERDB")
-strategy1 = app.config.get("STG1")
-userid = app.config.get("CLIENT1")
+myclient =os.environ.get("DBCONNECTION")
+mydb = os.environ.get("MASTERDB")
+strategy1 = os.environ.get("STG1")
+userid = os.environ.get("CLIENT1")
 
 key_signal = strategy1.find({}, {"stocks", "trigger_prices", "user", "Indicator"})
 for data in key_signal:
