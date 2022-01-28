@@ -13,8 +13,9 @@ from datetime import date
 import logging
 import os
 
-myclient =pymongo.MongoClient("mongodb+srv://admin:admin@cluster0.xsz8r.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
-mydb = myclient["StockboardDB"]
+myclient =os.environ.get("DBCONNECTION")
+mydb = os.environ.get("MASTERDB")
+
 strategy1 =mydb["strategy1"]
 userid = os.environ.get("CLIENT1")
 print(mydb)
@@ -23,4 +24,4 @@ print(userid)
 key_signal = strategy1.find({}, {"stocks", "trigger_prices", "user", "Indicator"})
 #key_signal = strategy1.find({})
 for data in key_signal:
-    print(data["stocks"])
+    print(data["user"])
