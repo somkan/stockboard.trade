@@ -13,12 +13,12 @@ from datetime import date
 import logging
 import os
 
-myclient =app.config.get("DBCONNECTION")
-mydb = app.config.get("MASTERDB")
-mycol = app.config.get("AUTH_DATA")
-mycol2 = app.config.get("ACCESS_TOKEN")
-strategy1 = app.config.get("STG1")
-userid = app.config.get("CLIENT1")
+myclient =os.environ.get("DBCONNECTION")
+mydb = os.environ.get("MASTERDB")
+mycol = os.environ.get("AUTH_DATA")
+mycol2 = os.environ.get("ACCESS_TOKEN")
+strategy1 = os.environ.get("STG1")
+userid = os.environ.get("CLIENT1")
 
 
 global fyers,capital,allot
