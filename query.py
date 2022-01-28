@@ -1,21 +1,12 @@
 # -*- coding: utf-8 -*-
 """
 """
-from fyers_api import fyersModel, accessToken
-import json
+
 import os
-import datetime as dt
-import time
-import requests
-from datetime import datetime
 import pymongo
-from datetime import date
-import logging
-import os
 
-myclient =os.environ.get(DBCONNECTION)
-mydb = os.environ.get(DBCONNECTION)["StockboardDB"]
-
+myclient =os.environ.get("DBCONNECTION")
+mydb = myclient["StockboardDB"]
 strategy1 =mydb["strategy1"]
 userid = os.environ.get("CLIENT1")
 print(mydb)
