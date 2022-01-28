@@ -5,7 +5,7 @@
 import os
 import pymongo
 
-myclient =os.environ.get("DBCONNECTION")
+myclient =str(os.environ.get("DBCONNECTION"))
 mydb = myclient["StockboardDB"]
 strategy1 =mydb["strategy1"]
 userid = os.environ.get("CLIENT1")
