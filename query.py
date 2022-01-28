@@ -5,7 +5,7 @@
 import os
 import pymongo
 
-myclient =str(os.environ.get("DBCONNECTION"))
+myClient =str(os.environ.get("DBCONNECTION"))
 mydb = str(os.environ.get("MASTERDB"))
 strategy1 =str(os.environ.get("STG1"))
 userid = os.environ.get("CLIENT1")
