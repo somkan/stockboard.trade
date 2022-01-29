@@ -3,17 +3,10 @@
 """
 
 import os
-import pymongo
+import redis
+from urllib.parse import urlparse
 
-myClient =str(os.environ.get("DBCONNECTION"))
-mydb = str(os.environ.get("MASTERDB"))
-strategy1 =str(os.environ.get("STG1"))
-userid = os.environ.get("CLIENT1")
-print(mydb)
-print(strategy1)
-print(userid)
-key_signal = strategy1.find({"user":userid}, {"stocks", "trigger_prices", "user", "Indicator"})
-key_sign = strategy1.find({})
-#key_signal = strategy1.find({})
-for data in key_signal:
-    print(data["user"])
+url = urlparse(os.environ.get("REDISCLOUD_URL"))
+r = redis.Redis(host=url.hostname, port=url.port, username=url.username, password=url.password, ssl=True, ssl_cert_reqs=None)
+
+print(r)
