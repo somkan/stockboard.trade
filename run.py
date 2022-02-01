@@ -23,4 +23,4 @@ def get_webhook1():
 
 if __name__ == '__main__':
     #telegram("Stockboard Webhook ","Running")
-    app.run()
+    app.run(host="54.86.50.139")
