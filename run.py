@@ -3,7 +3,7 @@ import redis
 from urllib.parse import urlparse
 import json
 from flask import Flask, request, abort, Response, render_template
-
+from redis.commands.json.path import Path
 
 app = Flask(__name__)
 
@@ -15,8 +15,7 @@ client = redis.Redis(host=url.hostname, port=url.port, username=url.username, pa
 @app.route('/strategy9', methods=['POST'])
 def get_webhook1():
     data = json.loads(request.data)
-
-    client.json().set('strategy:1',data)
+    client.json().set('strategy:1',Path.rootPath(),data)
     result = client.json().get('strategy:1')
     print(result)
 
