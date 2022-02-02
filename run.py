@@ -2,7 +2,7 @@ import os
 import redis
 from urllib.parse import urlparse
 import json
-from flask import Flask, request, abort, Response, render_template
+from flask import Flask, request, abort, Response, render_template,jsonify
 from redis.commands.json.path import Path
 
 app = Flask(__name__)
