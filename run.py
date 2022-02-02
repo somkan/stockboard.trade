@@ -3,7 +3,7 @@ import redis
 from urllib.parse import urlparse
 import json
 from flask import Flask, request, abort, Response, render_template
-
+from redis.commands.json.path import Path
 
 app = Flask(__name__)
 
@@ -24,11 +24,11 @@ def get_respond():
 def get_webhook1():
     data = json.loads(request.data)
 
-    client.json().set('strategy:1',data)
-    result = client.json().get('strategy:1')
+    client.json().set('strategy:1',Path.rootPath(),data)
+    result = client.json().get('strategy:1',Path('.stocks'))
     print(result)
 
 
 if __name__ == '__main__':
     #telegram("Stockboard Webhook ","Running")
-    app.run(host="https://stockboard-app.herokuapp.com",debug=True)
+    app.run()
